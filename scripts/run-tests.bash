@@ -25,11 +25,6 @@ npm run html-lint
 echo "---> Running overall css linting tests..."
 npm run css-lint
 
-cd "pmweb"
-
-echo ""
-echo "---> Running Angular linting test..."
-ng lint
 # npm run lint        # JS code quality check
 # npm test         # JS unit tests
 # flake8 .         # python code quality check
