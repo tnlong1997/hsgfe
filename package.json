@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "description": "Death is like a wind",
   "main": "index.js",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^5.16.0",
     "htmlhint": "^0.11.0",
     "stylelint": "^9.10.1"
   },
-  "devDependencies": {
-    "eslint": "^5.16.0"
-  },
   "scripts": {
-	"js-lint": "./node_modules/.bin/eslint '**/*.js'",
+    "js-lint": "./node_modules/.bin/eslint '**/*.js'",
     "js-lint-fix": "./node_modules/.bin/eslint '**/*.js' --fix",
     "html-lint": "./node_modules/.bin/htmlhint '**/*.html'",
     "css-lint": "./node_modules/.bin/stylelint '**/*.css'",
