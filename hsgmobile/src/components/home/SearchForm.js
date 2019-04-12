@@ -1,3 +1,4 @@
+/* global require */
 import React, {Component} from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Input, Icon, ButtonGroup, Header } from 'react-native-elements';

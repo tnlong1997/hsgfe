@@ -1,4 +1,4 @@
-
+/* global require */
 import React, {Component} from 'react';
 import { View, Text, KeyboardAvoidingView } from 'react-native';
 import SearchForm from './SearchForm';
