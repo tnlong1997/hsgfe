@@ -29,7 +29,7 @@ const NavStack = createBottomTabNavigator(
 				} else if (routeName === 'Noti') {
 					iconName = 'ios-notifications';
 				} else if (routeName === 'Test') {
-					iconName = 'ios-settings'
+					iconName = 'ios-settings';
 				}
 
 				// You can return any component that you like here!

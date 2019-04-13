@@ -274,6 +274,6 @@ var styles = StyleSheet.create({
 		borderRadius: 15
 	},
 	container: {
-        paddingTop: 22
-    }
+		paddingTop: 22
+	}
 });
