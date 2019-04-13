@@ -1,8 +1,10 @@
 /* global require */
 import React, {Component} from 'react';
-import { View, Text, KeyboardAvoidingView } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import SearchForm from './SearchForm';
 import { Font} from 'expo';
+import styles from './Styles';
+import {Header} from 'react-native-elements';
 
 export default class HostScreen extends Component {
 	constructor(props) {
@@ -26,9 +28,25 @@ export default class HostScreen extends Component {
 			);
 		} else {
 			return (
-				<KeyboardAvoidingView behavior="padding" enabled>
+				<View style={styles.container}>
+					<Header
+						backgroundColor= '#F49F0A'
+						leftComponent={{ icon: 'arrow-back', color: '#000000' }}
+						centerComponent={
+							<Image 
+								source={require('../../../assets/Hasagi.png')} 
+								style={{
+									width: 200, 
+									height: 100,
+									marginTop: 15
+								}} 
+								backgroundColor='transparent'
+							/> 
+						}
+						rightComponent={{ icon: 'search', color: '#000000' }}
+					/>
 					<SearchForm />
-				</KeyboardAvoidingView>
+				</View>
 			);
 		}
 	}

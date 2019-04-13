@@ -1,28 +1,12 @@
-/* global require */
-import {Text, View, Image, FlatList, StyleSheet} from 'react-native';
+import {Text, View, Image, FlatList} from 'react-native';
 import React, {Component} from 'react';
-import { Divider, Header } from 'react-native-elements';
+import { Divider } from 'react-native-elements';
+import styles from './Styles';
 
-export default class TestScreen extends Component {
+export default class SearchResultScreen extends Component {
 	render() {
 		return (
-			<View style={styles.container}>
-				<Header
-					backgroundColor= '#F49F0A'
-					leftComponent={{ icon: 'arrow-back', color: '#000000' }}
-					centerComponent={
-						<Image 
-							source={require('../../../assets/Hasagi.png')} 
-							style={{
-								width: 200, 
-								height: 100,
-								marginTop: 15
-							}} 
-							backgroundColor='transparent'
-						/> 
-					}
-					rightComponent={{ icon: 'search', color: '#000000' }}
-				/>
+			<View>
 				<FlatList
 					data={[
 						{
@@ -63,9 +47,9 @@ export default class TestScreen extends Component {
 						}
 					]}
 					renderItem={({item}) => 
-						<View style={{ width: null, height: 125, flexDirection: 'row', margin: 2}}>
+						<View style={styles.listItemView}>
 							<View style={styles.listItemInfo}>
-								<Text style={{ color: 'black', fontSize: 20, margin: 1, fontWeight: 'bold' }} numberOfLines={1}>{item.name}</Text>
+								<Text style={styles.listItemTitle} numberOfLines={1}>{item.name}</Text>
 								<Text style={styles.listItemText} numberOfLines={1}>
 									<Text style={{fontWeight: 'bold'}}>Location:</Text> {item.location}
 								</Text>
@@ -99,21 +83,3 @@ export default class TestScreen extends Component {
 		);
 	}
 }
-  
-const styles = StyleSheet.create({
-	container: {
-		paddingTop: 22
-	},
-	listItemInfo: {
-		flex: 3, 
-		backgroundColor: '#BEB7A4', 
-		alignSelf: 'flex-end', 
-		height: '100%',
-		paddingLeft: 5
-	},
-	listItemText: { 
-		color: 'black', 
-		fontSize: 14, 
-		margin: 1 
-	}
-});
