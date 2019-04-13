@@ -4,55 +4,57 @@ import { View, Text, Image } from 'react-native';
 import SearchForm from './SearchForm';
 import { Font} from 'expo';
 import styles from './Styles';
-import {Header, Icon} from 'react-native-elements';
+import {Header, Icon, Avatar} from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import SearchResultScreen from './SearchResultScreen';
+
+export class FeedScreen extends Component {
+	render() {
+		return (
+			<Header
+				backgroundColor= '#F49F0A'
+				leftComponent={
+					<Avatar
+						rounded
+						source={{
+							uri:
+							'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+						}}
+						title="MD"
+					/>
+				}
+				centerComponent={
+					<Image 
+						source={require('../../../assets/Hasagi.png')} 
+						style={styles.logo} 
+						backgroundColor='transparent'
+					/> 
+				}
+				rightComponent={
+					<Icon
+						name='search'
+						type='font-awesome'
+						color='#000000'
+						onPress={() => {
+							this.props.navigation.push('Search');
+						}}
+					/>
+				}
+			/>
+		);
+	}
+}
 
 
 const RootStack = createStackNavigator(
 	{
+		Feed: FeedScreen,
 		Search: SearchForm,
 		SearchResult: SearchResultScreen,
 	},
 	{
-		initialRouteName: 'Search',
-		headerMode: 'float',
-		defaultNavigationOptions: {
-			header: (props) => {
-				return (
-					<Header
-						backgroundColor= '#F49F0A'
-						leftComponent={
-							<Icon
-								name='arrow-left'
-								type='font-awesome'
-								color='#000000'
-								onPress={() => {
-									props.navigation.goBack(null);
-								}}
-							/>
-						}
-						centerComponent={
-							<Image 
-								source={require('../../../assets/Hasagi.png')} 
-								style={styles.logo} 
-								backgroundColor='transparent'
-							/> 
-						}
-						rightComponent={
-							<Icon
-								name='search'
-								type='font-awesome'
-								color='#000000'
-								onPress={() => {
-									props.navigation.push('SearchResult');
-								}}
-							/>
-						}
-					/>
-				);
-			}
-		}
+		initialRouteName: 'Feed',
+		headerMode: 'none'
 	}
 );
   

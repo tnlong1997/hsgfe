@@ -1,20 +1,31 @@
+/* global require */
 import React, {Component} from 'react';
-import { View } from 'react-native';
-import { Input, Icon, ButtonGroup } from 'react-native-elements';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
+import { Input, Icon, ButtonGroup, Header } from 'react-native-elements';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import styles from './Styles';
+// import console = require('console');
 
 export default class SearchForm extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			startTimeVisible: false,
 			endTimeVisible: false,
-			selectedIndex: 0,
+			selectedIndex: 0
+		};
+		this.searchCriteria = {
+			sports: null,
+			location: null,
+			distance: "5",
 			startDate: null,
-			endDate: null
+			endDate: null,
+			minimumPrice: null,
+			maximumPrice: null,
+			numOfPlayers: null,
+			eventId: null
 		};
 	}
   
@@ -23,6 +34,38 @@ export default class SearchForm extends Component {
 
 		return (
 			<View>
+				<Header
+					backgroundColor= '#F49F0A'
+					leftComponent={
+						<Icon
+							name='arrow-left'
+							type='font-awesome'
+							color='#000000'
+							onPress={() => {
+								this.props.navigation.pop();
+							}}
+						/>
+					}
+					centerComponent={
+						<Image 
+							source={require('../../../assets/Hasagi.png')} 
+							style={styles.logo} 
+							backgroundColor='transparent'
+						/> 
+					}
+					rightComponent={
+						<TouchableOpacity
+							onPress={() => {
+								this.props.navigation.push('SearchResult', {
+									searchCriteria: this.searchCriteria
+								});
+							}}
+						>
+							<Text style={styles.bold}>SEARCH</Text>
+						</TouchableOpacity> 
+					}
+				/>
+
 				<Input
 					placeholder='Sports'
 					leftIcon={
@@ -73,6 +116,7 @@ export default class SearchForm extends Component {
 				<ButtonGroup
 					buttonStyle = {styles.buttonGroup}
 					onPress={(index) => {
+						this.searchCriteria.distance=distance[index].split(' ')[0];
 						this.setState({selectedIndex: index});
 					}}
 					selectedIndex={this.state.selectedIndex}
@@ -85,7 +129,7 @@ export default class SearchForm extends Component {
 				<DateTimePicker
 					isVisible={this.state.startTimeVisible}
 					onConfirm={(date) => {
-						this.state.setState({startDate: date});
+						this.searchCriteria.startDate = date;
 						this.setState({ startTimeVisible: false });
 					}}
 					onCancel={() => {
@@ -121,15 +165,16 @@ export default class SearchForm extends Component {
 					onFocus={() => {
 						this.setState({ startTimeVisible: true });
 					}}
-					value={this.state.startDate != null ? 
-						moment(this.state.startDate).format("MMM D, YYYY, hh:mm a") : ""}
+					value={this.searchCriteria.startDate != null ? 
+						moment(this.searchCriteria.startDate).format("MMM D, YYYY, hh:mm a") : ""}
 				/>
 
 				{/* End time set up */}
 				<DateTimePicker
 					isVisible={this.state.endTimeVisible}
 					onConfirm={(date) => {
-						this.state.setState({endDate: date});
+						// this.state.setState({endDate: date});
+						this.searchCriteria.endDate = date;
 						this.setState({ endTimeVisible: false });
 					}}
 					onCancel={() => {
@@ -165,8 +210,8 @@ export default class SearchForm extends Component {
 					onFocus={() => {
 						this.setState({ endTimeVisible: true });
 					}}
-					value={this.state.endDate != null ? 
-						moment(this.state.endDate).format("MMM D, YYYY, hh:mm a") : ""}
+					value={this.searchCriteria.endDate != null ? 
+						moment(this.searchCriteria.endDate).format("MMM D, YYYY, hh:mm a") : ""}
 				/>
 
 				{/* Minumum Price */}
@@ -183,6 +228,9 @@ export default class SearchForm extends Component {
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 18 }}
+					onChangeText={(price) => {
+						this.searchCriteria.minimumPrice=price;
+					}}
 				/>
 
 				{/* Maximum Price */}
@@ -199,6 +247,9 @@ export default class SearchForm extends Component {
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 15 }}
+					onChangeText={(price) => {
+						this.searchCriteria.maximumPrice=price;
+					}}
 				/>
 
 				{/* Number of Players */}
@@ -215,6 +266,9 @@ export default class SearchForm extends Component {
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 13 }}
+					onChangeText={(players) => {
+						this.searchCriteria.numOfPlayers=players;
+					}}
 				/>
 
 				{/* Event ID */}
@@ -231,6 +285,9 @@ export default class SearchForm extends Component {
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 14 }}
+					onChangeText={(eventId) => {
+						this.searchCriteria.eventId=eventId;
+					}}
 				/>
 			</View>
 		);

@@ -1,12 +1,42 @@
-import {Text, View, Image, FlatList} from 'react-native';
+/* global require */
+import {Text, View, Image, FlatList, TouchableOpacity} from 'react-native';
 import React, {Component} from 'react';
-import { Divider } from 'react-native-elements';
+import { Divider, Header, Icon } from 'react-native-elements';
 import styles from './Styles';
 
 export default class SearchResultScreen extends Component {
 	render() {
 		return (
 			<View>
+				<Header
+					backgroundColor= '#F49F0A'
+					leftComponent={
+						<Icon
+							name='arrow-left'
+							type='font-awesome'
+							color='#000000'
+							onPress={() => {
+								this.props.navigation.pop();
+							}}
+						/>
+					}
+					centerComponent={
+						<Image 
+							source={require('../../../assets/Hasagi.png')} 
+							style={styles.logo} 
+							backgroundColor='transparent'
+						/> 
+					}
+					rightComponent={
+						<TouchableOpacity 
+							onPress={() => {
+								// console.log(this.props.navigation.getParam('searchCriteria'));
+							}}
+						>
+							<Text style={styles.bold}>SORT</Text>
+						</TouchableOpacity>
+					}
+				/>
 				<FlatList
 					data={[
 						{
@@ -51,16 +81,16 @@ export default class SearchResultScreen extends Component {
 							<View style={styles.listItemInfo}>
 								<Text style={styles.listItemTitle} numberOfLines={1}>{item.name}</Text>
 								<Text style={styles.listItemText} numberOfLines={1}>
-									<Text style={{fontWeight: 'bold'}}>Location:</Text> {item.location}
+									<Text style={styles.bold}>Location:</Text> {item.location}
 								</Text>
 								<Text style={styles.listItemText} numberOfLines={1}>
-									<Text style={{fontWeight: 'bold'}}>Time:</Text> {item.time}
+									<Text style={styles.bold}>Time:</Text> {item.time}
 								</Text>
 								<Text style={styles.listItemText} numberOfLines={1}>
-									<Text style={{fontWeight: 'bold'}}>Players:</Text> {item.numOfPlayers}
+									<Text style={styles.bold}>Players:</Text> {item.numOfPlayers}
 								</Text>
 								<Text style={styles.listItemText} numberOfLines={1}>
-									<Text style={{fontWeight: 'bold'}}>Sport:</Text> {item.sport}
+									<Text style={styles.bold}>Sport:</Text> {item.sport}
 								</Text>
 							</View>
 							<Image

@@ -4,8 +4,8 @@ export default StyleSheet.create({
 	buttonGroupContainer: {
 		marginTop: 15,
 		marginBottom: 20,
-		height: 30,
-		borderRadius: 15
+		height: 40,
+		borderRadius: 25
 	},
 	
 	container: {
@@ -47,6 +47,10 @@ export default StyleSheet.create({
 		color: 'black', 
 		fontSize: 20, 
 		margin: 1, 
+		fontWeight: 'bold'
+	},
+
+	bold: {
 		fontWeight: 'bold'
 	}
 });
