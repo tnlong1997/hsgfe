@@ -1,69 +1,71 @@
 /* global require */
 import React, {Component} from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { View, Image, TouchableOpacity, Text } from 'react-native';
 import { Input, Icon, ButtonGroup, Header } from 'react-native-elements';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import styles from './Styles';
+// import console = require('console');
 
 export default class SearchForm extends Component {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			startTimeVisible: false,
 			endTimeVisible: false,
 			selectedIndex: 0
 		};
-		this.startDate = null;
-		this.endDate = null;
-	}
-
-	_showStartTimePicker = () => this.setState({ startTimeVisible: true });
-	
-	_hideStartTimePicker = () => this.setState({ startTimeVisible: false });
-
-	_showEndTimePicker = () => this.setState({ endTimeVisible: true });
-	
-	_hideEndTimePicker = () => this.setState({ endTimeVisible: false });
-
-	_handleStartDatePicked = (date) => {
-		this.startDate = date;
-		this._hideStartTimePicker();
-	}
-
-	_handleEndDatePicked = (date) => {
-		this.endDate = date;
-		this._hideEndTimePicker();
-	}
-
-	_updateIndex = (index) => {
-		this.setState({selectedIndex: index});
+		this.searchCriteria = {
+			sports: null,
+			location: null,
+			distance: "5",
+			startDate: null,
+			endDate: null,
+			minimumPrice: null,
+			maximumPrice: null,
+			numOfPlayers: null,
+			eventId: null
+		};
 	}
   
 	render() {
 		const distance = ['5 miles', '10 miles', '15 miles', '20 miles'];
-		const { selectedIndex } = this.state;
 
 		return (
-			<View style={styles.container}>
+			<View>
 				<Header
 					backgroundColor= '#F49F0A'
-					// placement="left"
-					leftComponent={{ icon: 'arrow-back', color: '#FFFFFC' }}
+					leftComponent={
+						<Icon
+							name='arrow-left'
+							type='font-awesome'
+							color='#000000'
+							onPress={() => {
+								this.props.navigation.pop();
+							}}
+						/>
+					}
 					centerComponent={
 						<Image 
 							source={require('../../../assets/Hasagi.png')} 
-							style={{
-								width: 200, 
-								height: 100,
-								marginTop: 15
-							}} 
+							style={styles.logo} 
 							backgroundColor='transparent'
 						/> 
 					}
-					rightComponent={{ text: 'SEARCH', style: { color: '#FFFFFC', fontWeight: 'bold' } }}
+					rightComponent={
+						<TouchableOpacity
+							onPress={() => {
+								this.props.navigation.push('SearchResult', {
+									searchCriteria: this.searchCriteria
+								});
+							}}
+						>
+							<Text style={styles.bold}>SEARCH</Text>
+						</TouchableOpacity> 
+					}
 				/>
-				
+
 				<Input
 					placeholder='Sports'
 					leftIcon={
@@ -113,8 +115,11 @@ export default class SearchForm extends Component {
 				/>
 				<ButtonGroup
 					buttonStyle = {styles.buttonGroup}
-					onPress={this._updateIndex}
-					selectedIndex={selectedIndex}
+					onPress={(index) => {
+						this.searchCriteria.distance=distance[index].split(' ')[0];
+						this.setState({selectedIndex: index});
+					}}
+					selectedIndex={this.state.selectedIndex}
 					buttons={distance}
 					containerStyle={styles.buttonGroupContainer}
 					containerBorderRadius= {0}
@@ -123,21 +128,26 @@ export default class SearchForm extends Component {
 				{/* Start time set up */}
 				<DateTimePicker
 					isVisible={this.state.startTimeVisible}
-					onConfirm={this._handleStartDatePicked}
-					onCancel={this._hideStartTimePicker}
+					onConfirm={(date) => {
+						this.searchCriteria.startDate = date;
+						this.setState({ startTimeVisible: false });
+					}}
+					onCancel={() => {
+						this.setState({ startTimeVisible: false });
+					}}
 					mode='datetime'
 					datePickerModeAndroid='spinner'
 					is24Hour = {false}
 				/>
 				<Input
-					placeholder='Start time1'
+					placeholder='Start time'
 					leftIcon={
 						<Icon
 							name="calendar-minus-o"
 							type="font-awesome"
 							color="rgba(0, 0, 0, 0.38)"
 							size={25}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 						/>
 					}
 					rightIcon={
@@ -146,24 +156,30 @@ export default class SearchForm extends Component {
 							type="font-awesome"
 							color="rgba(0, 0, 0, 0.38)"
 							size={25}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 							onPress={() => this.setState({startTimeVisible: true})}
 						/>
 					}
 					editable= {false}
 					inputStyle={{ marginLeft: 10 }}
 					onFocus={() => {
-						this._showStartTimePicker();
+						this.setState({ startTimeVisible: true });
 					}}
-					value={this.startDate != null ? 
-						moment(this.startDate).format("MMM D, YYYY, hh:mm a") : ""}
+					value={this.searchCriteria.startDate != null ? 
+						moment(this.searchCriteria.startDate).format("MMM D, YYYY, hh:mm a") : ""}
 				/>
 
 				{/* End time set up */}
 				<DateTimePicker
 					isVisible={this.state.endTimeVisible}
-					onConfirm={this._handleEndDatePicked}
-					onCancel={this._hideEndTimePicker}
+					onConfirm={(date) => {
+						// this.state.setState({endDate: date});
+						this.searchCriteria.endDate = date;
+						this.setState({ endTimeVisible: false });
+					}}
+					onCancel={() => {
+						this.setState({ endTimeVisible: false });
+					}}
 					mode='datetime'
 					datePickerModeAndroid='spinner'
 					is24Hour = {false}
@@ -176,7 +192,7 @@ export default class SearchForm extends Component {
 							type="font-awesome"
 							color="rgba(0, 0, 0, 0.38)"
 							size={25}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 						/>
 					}
 					rightIcon={
@@ -185,17 +201,17 @@ export default class SearchForm extends Component {
 							type="font-awesome"
 							color="rgba(0, 0, 0, 0.38)"
 							size={25}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 							onPress={() => this.setState({endTimeVisible: true})}
 						/>
 					}
 					editable= {false}
 					inputStyle={{ marginLeft: 10 }}
 					onFocus={() => {
-						this._showEndTimePicker();
+						this.setState({ endTimeVisible: true });
 					}}
-					value={this.endDate != null ? 
-						moment(this.endDate).format("MMM D, YYYY, hh:mm a") : ""}
+					value={this.searchCriteria.endDate != null ? 
+						moment(this.searchCriteria.endDate).format("MMM D, YYYY, hh:mm a") : ""}
 				/>
 
 				{/* Minumum Price */}
@@ -207,11 +223,14 @@ export default class SearchForm extends Component {
 							type="foundation"
 							color="rgba(0, 0, 0, 0.38)"
 							size={25}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 						/>
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 18 }}
+					onChangeText={(price) => {
+						this.searchCriteria.minimumPrice=price;
+					}}
 				/>
 
 				{/* Maximum Price */}
@@ -223,11 +242,14 @@ export default class SearchForm extends Component {
 							type="foundation"
 							color="rgba(0, 0, 0, 0.38)"
 							size={25}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 						/>
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 15 }}
+					onChangeText={(price) => {
+						this.searchCriteria.maximumPrice=price;
+					}}
 				/>
 
 				{/* Number of Players */}
@@ -239,11 +261,14 @@ export default class SearchForm extends Component {
 							type="font-awesome"
 							color="rgba(0, 0, 0, 0.38)"
 							size={20}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 						/>
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 13 }}
+					onChangeText={(players) => {
+						this.searchCriteria.numOfPlayers=players;
+					}}
 				/>
 
 				{/* Event ID */}
@@ -255,25 +280,16 @@ export default class SearchForm extends Component {
 							type="font-awesome"
 							color="rgba(0, 0, 0, 0.38)"
 							size={20}
-							style={{ backgroundColor: 'transparent' }}
+							style={styles.inputIcon}
 						/>
 					}
 					keyboardType='numeric'
 					inputStyle={{ marginLeft: 14 }}
+					onChangeText={(eventId) => {
+						this.searchCriteria.eventId=eventId;
+					}}
 				/>
 			</View>
 		);
 	}
 }
-
-var styles = StyleSheet.create({
-	buttonGroupContainer: {
-		marginTop: 15,
-		marginBottom: 20,
-		height: 30,
-		borderRadius: 15
-	},
-	container: {
-		paddingTop: 22
-	}
-});

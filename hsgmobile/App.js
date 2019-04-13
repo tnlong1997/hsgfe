@@ -4,11 +4,10 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './src/components/home/HomeScreen';
 import HostScreen from './src/components/host/HostScreen';
 import NotiScreen from './src/components/noti/NotiScreen';
-import TestScreen from './src/components/test/TestScreen';
 
 const NavStack = createBottomTabNavigator(
 	{
-		Test: TestScreen, // Test screen for UI developing, comment out when doing UI test.
+		// Test: SearchResultScreen, // Test screen for UI developing, comment out when doing UI test.
 		Home: HomeScreen,
 		Host: HostScreen,
 		Noti: NotiScreen
@@ -16,6 +15,7 @@ const NavStack = createBottomTabNavigator(
 	{
 		defaultNavigationOptions: ({ navigation }) => ({
 			tabBarIcon: ({ tintColor }) => {
+				// console.log(navigation.state)
 				const { routeName } = navigation.state;
 				let iconName;
 				if (routeName === 'Home') {
