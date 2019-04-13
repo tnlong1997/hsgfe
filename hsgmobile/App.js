@@ -4,9 +4,11 @@ import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from './src/components/home/HomeScreen';
 import HostScreen from './src/components/host/HostScreen';
 import NotiScreen from './src/components/noti/NotiScreen';
+import TestScreen from './src/components/test/TestScreen';
 
 const NavStack = createBottomTabNavigator(
 	{
+		Test: TestScreen, // Test screen for UI developing, comment out when doing UI test.
 		Home: HomeScreen,
 		Host: HostScreen,
 		Noti: NotiScreen
@@ -26,6 +28,8 @@ const NavStack = createBottomTabNavigator(
 					iconName = `ios-basketball`;
 				} else if (routeName === 'Noti') {
 					iconName = 'ios-notifications';
+				} else if (routeName === 'Test') {
+					iconName = 'ios-settings'
 				}
 
 				// You can return any component that you like here!
@@ -33,10 +37,10 @@ const NavStack = createBottomTabNavigator(
 			},
 		}),
 		tabBarOptions: {
-			activeTintColor: 'white',
-			inactiveTintColor: 'gray',
-			activeBackgroundColor: '#FFD167',
-			inactiveBackgroundColor: '#FEBB35'
+			activeTintColor: '#000000',
+			inactiveTintColor: '#FFFFFC',
+			activeBackgroundColor: '#FECC52',
+			inactiveBackgroundColor: '#F49F0A'
 		},
 	}
 );

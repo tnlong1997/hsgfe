@@ -8,7 +8,7 @@ export default class NotiScreen extends Component {
 		return (
 			<View>
 				<Header />
-				<Text>Notiost</Text>
+				<Text>Noti</Text>
 			</View>
 		);
 	}

@@ -45,23 +45,23 @@ export default class SearchForm extends Component {
 		const { selectedIndex } = this.state;
 
 		return (
-			<View>
+			<View style={styles.container}>
 				<Header
-					backgroundColor= '#FEBB35'
+					backgroundColor= '#F49F0A'
 					// placement="left"
-					leftComponent={{ icon: 'arrow-back', color: '#fff' }}
+					leftComponent={{ icon: 'arrow-back', color: '#FFFFFC' }}
 					centerComponent={
 						<Image 
 							source={require('../../../assets/Hasagi.png')} 
 							style={{
 								width: 200, 
-								height: 150,
+								height: 100,
 								marginTop: 15
 							}} 
 							backgroundColor='transparent'
 						/> 
 					}
-					rightComponent={{ text: 'SEARCH', style: { color: '#fff' } }}
+					rightComponent={{ text: 'SEARCH', style: { color: '#FFFFFC', fontWeight: 'bold' } }}
 				/>
 				
 				<Input
@@ -272,5 +272,8 @@ var styles = StyleSheet.create({
 		marginBottom: 20,
 		height: 30,
 		borderRadius: 15
-	}
+	},
+	container: {
+        paddingTop: 22
+    }
 });
