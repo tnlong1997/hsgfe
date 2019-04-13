@@ -4,7 +4,59 @@ import { View, Text, Image } from 'react-native';
 import SearchForm from './SearchForm';
 import { Font} from 'expo';
 import styles from './Styles';
-import {Header} from 'react-native-elements';
+import {Header, Icon} from 'react-native-elements';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import SearchResultScreen from './SearchResultScreen';
+
+
+const RootStack = createStackNavigator(
+	{
+		Search: SearchForm,
+		SearchResult: SearchResultScreen,
+	},
+	{
+		initialRouteName: 'Search',
+		headerMode: 'float',
+		defaultNavigationOptions: {
+			header: (props) => {
+				return (
+					<Header
+						backgroundColor= '#F49F0A'
+						leftComponent={
+							<Icon
+								name='arrow-left'
+								type='font-awesome'
+								color='#000000'
+								onPress={() => {
+									props.navigation.goBack(null);
+								}}
+							/>
+						}
+						centerComponent={
+							<Image 
+								source={require('../../../assets/Hasagi.png')} 
+								style={styles.logo} 
+								backgroundColor='transparent'
+							/> 
+						}
+						rightComponent={
+							<Icon
+								name='search'
+								type='font-awesome'
+								color='#000000'
+								onPress={() => {
+									props.navigation.push('SearchResult');
+								}}
+							/>
+						}
+					/>
+				);
+			}
+		}
+	}
+);
+  
+const AppContainer = createAppContainer(RootStack);
 
 export default class HostScreen extends Component {
 	constructor(props) {
@@ -27,27 +79,10 @@ export default class HostScreen extends Component {
 				</View>
 			);
 		} else {
-			return (
-				<View style={styles.container}>
-					<Header
-						backgroundColor= '#F49F0A'
-						leftComponent={{ icon: 'arrow-back', color: '#000000' }}
-						centerComponent={
-							<Image 
-								source={require('../../../assets/Hasagi.png')} 
-								style={{
-									width: 200, 
-									height: 100,
-									marginTop: 15
-								}} 
-								backgroundColor='transparent'
-							/> 
-						}
-						rightComponent={{ icon: 'search', color: '#000000' }}
-					/>
-					<SearchForm />
-				</View>
-			);
+			// a = this.props.navigation;
+			// a.navigate('SearchResult');
+			// console.log("\n\n\n")
+			return <AppContainer />;
 		}
 	}
 }

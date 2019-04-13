@@ -15,6 +15,7 @@ const NavStack = createBottomTabNavigator(
 	{
 		defaultNavigationOptions: ({ navigation }) => ({
 			tabBarIcon: ({ tintColor }) => {
+				// console.log(navigation.state)
 				const { routeName } = navigation.state;
 				let iconName;
 				if (routeName === 'Home') {
