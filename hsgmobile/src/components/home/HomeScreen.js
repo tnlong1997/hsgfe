@@ -7,6 +7,7 @@ import styles from './Styles';
 import {Header, Icon, Avatar} from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import SearchResultScreen from './SearchResultScreen';
+import EventDetail from '../general/EventDetail';
 
 export class FeedScreen extends Component {
 	render() {
@@ -51,9 +52,10 @@ const RootStack = createStackNavigator(
 		Feed: FeedScreen,
 		Search: SearchForm,
 		SearchResult: SearchResultScreen,
+		Event: EventDetail
 	},
 	{
-		initialRouteName: 'Feed',
+		initialRouteName: 'SearchResult',
 		headerMode: 'none'
 	}
 );
@@ -61,30 +63,7 @@ const RootStack = createStackNavigator(
 const AppContainer = createAppContainer(RootStack);
 
 export default class HostScreen extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { loading: true };
-	}
-		
-	async UNSAFE_componentWillMount() {
-		await Font.loadAsync({
-			Roboto: require("native-base/Fonts/Roboto.ttf"),
-			Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
-		});
-		this.setState({ loading: false });
-	}
 	render() {
-		if (this.state.loading) {
-			return (
-				<View>
-					<Text>Loading...</Text>
-				</View>
-			);
-		} else {
-			// a = this.props.navigation;
-			// a.navigate('SearchResult');
-			// console.log("\n\n\n")
-			return <AppContainer />;
-		}
+		return <AppContainer />;
 	}
 }

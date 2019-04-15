@@ -5,6 +5,10 @@ import { Divider, Header, Icon } from 'react-native-elements';
 import styles from './Styles';
 
 export default class SearchResultScreen extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
 		return (
 			<View>
@@ -77,7 +81,14 @@ export default class SearchResultScreen extends Component {
 						}
 					]}
 					renderItem={({item}) => 
-						<View style={styles.listItemView}>
+						<TouchableOpacity 
+							style={styles.listItemView}
+							onPress={() => {
+								this.props.navigation.push('Event', {
+									eventDetail: item
+								});
+							}}
+						>
 							<View style={styles.listItemInfo}>
 								<Text style={styles.listItemTitle} numberOfLines={1}>{item.name}</Text>
 								<Text style={styles.listItemText} numberOfLines={1}>
@@ -99,7 +110,7 @@ export default class SearchResultScreen extends Component {
 									{uri: item.imageSrc} : {uri: 'https://static.thenounproject.com/png/250091-200.png'}
 								]}
 							/>
-						</View>
+						</TouchableOpacity>
 					}
 					ItemSeparatorComponent={() => (
 						<View>

@@ -1,6 +1,8 @@
-import React from 'react';
-import { Icon } from 'native-base';
+import React, {Component} from 'react';
+import { Image, ActivityIndicator } from 'react-native'
+import { Icon, View, Text } from 'native-base';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { Font} from 'expo';
 import HomeScreen from './src/components/home/HomeScreen';
 import HostScreen from './src/components/host/HostScreen';
 import NotiScreen from './src/components/noti/NotiScreen';
@@ -45,4 +47,44 @@ const NavStack = createBottomTabNavigator(
 	}
 );
 
-export default createAppContainer(NavStack);
+const FirstScreen = createAppContainer(NavStack)
+
+export default class StartScreen extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { loading: true };
+	}
+		
+	async UNSAFE_componentWillMount() {
+		await Font.loadAsync({
+			Roboto: require("native-base/Fonts/Roboto.ttf"),
+			Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+		});
+		this.setState({ loading: false });
+	}
+	render() {
+		if (this.state.loading) {
+			return (
+				<View>
+					<Image 
+						source={require('./assets/Hasagi.png')} 
+						style={{width: '100%', height: '100%'}}
+						backgroundColor='tranparent'
+					/> 
+					<View style ={{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						bottom: 50,
+						alignItems: 'center',
+    					justifyContent: 'center'
+					}}>
+						<ActivityIndicator size={80} color="#F49F0A" />
+					</View>
+				</View>
+			);
+		} else {
+			return <FirstScreen />;
+		}
+	}
+}
