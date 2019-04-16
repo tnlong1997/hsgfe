@@ -24,7 +24,7 @@ export default StyleSheet.create({
 
 	listItemInfo: {
 		flex: 3, 
-		backgroundColor: '#BEB7A4', 
+		// backgroundColor: '#BEB7A4', 
 		alignSelf: 'flex-end', 
 		height: '100%',
 		paddingLeft: 5
@@ -40,7 +40,8 @@ export default StyleSheet.create({
 		width: null, 
 		height: 125, 
 		flexDirection: 'row', 
-		margin: 2
+		margin: 2,
+		backgroundColor: '#BEB7A4'
 	},
 
 	listItemTitle: {

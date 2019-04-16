@@ -46,6 +46,7 @@ export default class SearchResultScreen extends Component {
 						{
 							key: '0', // Event ID
 							name: 'MU vs Barca',
+							hostName: 'Mike',
 							location: 'Mỹ Đình',
 							time: 'Jan 1, 2019, 06:00 pm',
 							numOfPlayers: 24,
@@ -55,6 +56,7 @@ export default class SearchResultScreen extends Component {
 						{
 							key: '1',
 							name: 'Basketball 101',
+							hostName: 'John',
 							location: '123 Main Street, LA',
 							time: 'Apr 12, 2019, 08:47 pm',
 							numOfPlayers: 12,
@@ -65,6 +67,7 @@ export default class SearchResultScreen extends Component {
 							key: '2',
 							name: 'Baseball 102',
 							location: '823 Milan Street, LA',
+							hostName: 'Susan',
 							time: 'May 12, 2019, 08:47 pm',
 							numOfPlayers: 2,
 							sport: 'Baseball',
@@ -75,6 +78,7 @@ export default class SearchResultScreen extends Component {
 							name: 'Bla bla bla',
 							location: 'Đéo biết',
 							time: 'Jul 12, 2019, 08:47 pm',
+							hostName: 'Jaime',
 							numOfPlayers: 0,
 							sport: 'Badminton',
 							imageSrc: null
@@ -104,8 +108,13 @@ export default class SearchResultScreen extends Component {
 									<Text style={styles.bold}>Sport:</Text> {item.sport}
 								</Text>
 							</View>
+							<View style={{flex: 0.7, flexDirection: 'column'}}>
+								<Text style={{flex:1, color:'#4d7224'}}>$$$</Text>
+								<Text style={{flex:3}}></Text>
+								<Text style={{flex:1, color:'#4d7224'}}>.6 mi</Text>
+							</View>
 							<Image
-								style={{ flex: 1}}
+								style={{ flex: 1.3}}
 								source={[item.imageSrc != null ? 
 									{uri: item.imageSrc} : {uri: 'https://static.thenounproject.com/png/250091-200.png'}
 								]}

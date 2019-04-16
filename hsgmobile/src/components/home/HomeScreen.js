@@ -25,11 +25,11 @@ export class FeedScreen extends Component {
 					/>
 				}
 				centerComponent={
-					<Image 
-						source={require('../../../assets/Hasagi.png')} 
-						style={styles.logo} 
+					<Image
+						source={require('../../../assets/Hasagi.png')}
+						style={styles.logo}
 						backgroundColor='transparent'
-					/> 
+					/>
 				}
 				rightComponent={
 					<Icon
@@ -59,10 +59,10 @@ const RootStack = createStackNavigator(
 		headerMode: 'none'
 	}
 );
-  
+
 const AppContainer = createAppContainer(RootStack);
 
-export default class HostScreen extends Component {
+export default class HomeScreen extends Component {
 	render() {
 		return <AppContainer />;
 	}
