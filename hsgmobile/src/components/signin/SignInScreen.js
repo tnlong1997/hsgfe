@@ -18,7 +18,7 @@ export default class SignIn extends React.Component {
 						backgroundColor="#03A9F4"
 						title="SIGN IN"
 						onPress={() => {
-							onSignIn().then(() => this.props.snavigation.navigate("SignedIn"));
+							onSignIn().then(() => this.props.navigation.navigate("SignedIn"));
 						}}
 					/>
 				</Card>

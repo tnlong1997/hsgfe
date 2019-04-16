@@ -37,7 +37,7 @@ export const SignedIn = createBottomTabNavigator(
 		Home: HomeScreen,
 		Host: HostScreen,
 		Noti: NotiScreen,
-		Prof: ProfileScreen,
+		Profile: ProfileScreen,
 	},
 	{
 		defaultNavigationOptions: ({ navigation }) => ({
@@ -56,8 +56,8 @@ export const SignedIn = createBottomTabNavigator(
 					iconName = 'ios-notifications';
 				} else if (routeName === 'Test') {
 					iconName = 'ios-settings';
-				} else if (routeName === 'Prof') {
-					iconName = 'ios-profile';
+				} else if (routeName === 'Profile') {
+					iconName = 'ios-log-out';
 				}
 
 				// You can return any component that you like here!
