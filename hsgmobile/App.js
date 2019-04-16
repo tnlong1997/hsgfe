@@ -8,7 +8,7 @@ export default class App extends React.Component {
 
 		this.state = {
 			signedIn: false,
-			checkedSignIn: false
+			checkedSignIn: true,
 		};
 	}
 
@@ -25,7 +25,7 @@ export default class App extends React.Component {
 			return null;
 		}
 
-		const Layout = createRootNavigator(signedIn);
+		const Layout = createRootNavigator(false);
 		return <Layout />;
 	}
 }

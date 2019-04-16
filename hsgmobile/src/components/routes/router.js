@@ -1,8 +1,7 @@
 import React from "react";
 import { Platform, StatusBar } from "react-native";
-import { createStackNavigator, createBottomTabNavigator, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from "react-navigation";
 import {Icon} from 'native-base';
-
 import SignIn from "../signin/SignInScreen";
 import SignUp from "../signup/SignUpScreen";
 import HomeScreen from "../home/HomeScreen";
@@ -75,7 +74,7 @@ export const SignedIn = createBottomTabNavigator(
 );
 
 export const createRootNavigator = (signedIn = false) => {
-	return createSwitchNavigator(
+	let switchNavigator = createSwitchNavigator(
 		{
 			SignedIn: {
 				screen: SignedIn
@@ -88,4 +87,5 @@ export const createRootNavigator = (signedIn = false) => {
 			initialRouteName: signedIn ? "SignedIn" : "SignedOut"
 		}
 	);
+	return createAppContainer(switchNavigator);
 };

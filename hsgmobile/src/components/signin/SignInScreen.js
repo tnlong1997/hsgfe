@@ -1,24 +1,28 @@
 import React from "react";
 import { View } from "react-native";
-import { Card, Button, FormLabel, FormInput } from "react-native-elements";
+import { Card, Button, Badge, Input } from "react-native-elements";
 import { onSignIn } from "../../../auth";
 
-export default ({ navigation }) => (
-	<View style={{ paddingVertical: 20 }}>
-		<Card>
-			<FormLabel>Email</FormLabel>
-			<FormInput placeholder="Email address" />
-			<FormLabel>Password</FormLabel>
-			<FormInput secureTextEntry placeholder="Password" />
+export default class SignIn extends React.Component {
+	render() {
+		return (
+			<View style={{ paddingVertical: 20 }}>
+				<Card>
+					<Badge>Email</Badge>
+					<Input placeholder="Email address" />
+					<Badge>Password</Badge>
+					<Input secureTextEntry placeholder="Password" />
 
-			<Button
-				buttonStyle={{ marginTop: 20 }}
-				backgroundColor="#03A9F4"
-				title="SIGN IN"
-				onPress={() => {
-					onSignIn().then(() => navigation.navigate("SignedIn"));
-				}}
-			/>
-		</Card>
-	</View>
-);
+					<Button
+						buttonStyle={{ marginTop: 20 }}
+						backgroundColor="#03A9F4"
+						title="SIGN IN"
+						onPress={() => {
+							onSignIn().then(() => this.props.snavigation.navigate("SignedIn"));
+						}}
+					/>
+				</Card>
+			</View>
+		);
+	}
+}
