@@ -1,8 +1,7 @@
 /* global require */
 import React, {Component} from 'react';
-import { View, Text, Image } from 'react-native';
+import { Image } from 'react-native';
 import SearchForm from './SearchForm';
-import { Font} from 'expo';
 import styles from './Styles';
 import {Header, Icon, Avatar} from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';

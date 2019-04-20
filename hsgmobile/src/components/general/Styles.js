@@ -5,7 +5,7 @@ export default StyleSheet.create({
 		width: 200, 
 		height: 100,
 		marginTop: 15
-    },
+	},
     
 	title: {
 		color: 'black', 

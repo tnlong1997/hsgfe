@@ -1,8 +1,9 @@
+/* global require */
 import React from "react";
 import { createRootNavigator } from "./src/components/routes/router";
 import { isSignedIn } from "./auth";
 import { ActivityIndicator, View, Image } from 'react-native';
-import { Font } from 'expo'
+import { Font } from 'expo';
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -44,12 +45,12 @@ export default class App extends React.Component {
 						right: 0,
 						bottom: 50,
 						alignItems: 'center',
-    					justifyContent: 'center'
+						justifyContent: 'center'
 					}}>
 						<ActivityIndicator size={80} color="#F49F0A" />
 					</View>
 				</View>
-			)
+			);
 		}
 		
 		// If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)

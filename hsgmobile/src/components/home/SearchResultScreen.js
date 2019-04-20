@@ -109,9 +109,9 @@ export default class SearchResultScreen extends Component {
 								</Text>
 							</View>
 							<View style={{flex: 0.7, flexDirection: 'column'}}>
-								<Text style={{flex:1, color:'#4d7224'}}>$$$</Text>
-								<Text style={{flex:3}}></Text>
-								<Text style={{flex:1, color:'#4d7224'}}>.6 mi</Text>
+								<Text style={{flex: 1, color: '#4d7224'}}>$$$</Text>
+								<Text style={{flex: 3}}></Text>
+								<Text style={{flex: 1, color: '#4d7224'}}>1.6 mi</Text>
 							</View>
 							<Image
 								style={{ flex: 1.3}}
