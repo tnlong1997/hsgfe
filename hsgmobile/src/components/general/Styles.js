@@ -30,5 +30,11 @@ export default StyleSheet.create({
 		marginTop: 7,
 		color: "#ACABAD",
 		fontWeight: 'bold'
+	},
+
+	errorText: {
+		color: 'red',
+		fontSize: 12,
+		paddingLeft: 10
 	}
 });

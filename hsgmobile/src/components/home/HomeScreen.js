@@ -54,7 +54,7 @@ const RootStack = createStackNavigator(
 		Event: EventDetail
 	},
 	{
-		initialRouteName: 'SearchResult',
+		initialRouteName: 'Feed',
 		headerMode: 'none'
 	}
 );
