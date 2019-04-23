@@ -64,10 +64,10 @@ export default class SignUp extends React.Component {
 							this.setState({emailError: emailError});
 							this.setState({passwordError: passwordError});
 							this.setState({passwordConfirmError: passwordConfirmError});
-              let info = {
-                email: this.state.email,
-                password: this.state.password
-              }
+							let info = {
+								email: this.state.email,
+								password: this.state.password
+							};
 							if (!emailError && !passwordError && !passwordConfirmError) {
 								this.setState({loading: true});
 								HttpRequest.post('/users/signup', info).then((res) => {

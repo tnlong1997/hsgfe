@@ -61,7 +61,7 @@ export default class SignIn extends React.Component {
 							let info = {
 								email: this.state.email,
 								password: this.state.password
-							}
+							};
 							this.setState({validationError: ""});
 							this.setState({emailError: emailError});
 							this.setState({passwordError: passwordError});
