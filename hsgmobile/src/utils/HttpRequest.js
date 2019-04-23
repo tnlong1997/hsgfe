@@ -1,6 +1,6 @@
 export default class HttpRequest {
 	static post = (url, data) => {
-		return fetch('http://10.0.2.2:3000' + url, {
+		return fetch('https://hasagi-test.herokuapp.com' + url, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
