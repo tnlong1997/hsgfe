@@ -34,11 +34,11 @@ export default class App extends React.Component {
 		if (loading) {
 			return (
 				<View>
-					<Image 
-						source={require('./assets/Hasagi.png')} 
+					<Image
+						source={require('./assets/Hasagi.png')}
 						style={{width: '100%', height: '100%'}}
 						backgroundColor='tranparent'
-					/> 
+					/>
 					<View style ={{
 						position: 'absolute',
 						left: 0,
@@ -47,12 +47,12 @@ export default class App extends React.Component {
 						alignItems: 'center',
 						justifyContent: 'center'
 					}}>
-						<ActivityIndicator size={80} color="#F49F0A" />
+						<ActivityIndicator size="large" color="#F49F0A" />
 					</View>
 				</View>
 			);
 		}
-		
+
 		// If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
 		else if (!checkedSignIn) {
 			return null;
