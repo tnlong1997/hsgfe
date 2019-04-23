@@ -25,18 +25,19 @@ export default class SignIn extends React.Component {
 				<Card>
 
 					{/* Email */}
-					<Input 
-						placeholder="Email address" 
+					<Input
+						placeholder="Email address"
 						keyboardType="email-address"
 						onChangeText={(email) => this.setState({email})}
+						autoCapitalize = "none"
 						value={this.state.email}
 					/>
 					<Text style={styles.errorText}>{this.state.emailError}</Text>
 
 					{/* Password */}
-					<Input 
-						secureTextEntry 
-						placeholder="Password" 
+					<Input
+						secureTextEntry
+						placeholder="Password"
 						onChangeText={(password) => this.setState({password})}
 						value={this.state.password}
 					/>
@@ -46,7 +47,7 @@ export default class SignIn extends React.Component {
 					<View>
 						{this.state.loading ? (<ActivityIndicator size="large" color="#F49F0A" />) : (<View />)}
 					</View>
-						
+
 					{/* Validation */}
 					<Text style={styles.errorText}>{this.state.validationError}</Text>
 
