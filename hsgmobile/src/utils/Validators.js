@@ -13,4 +13,8 @@ export default class Validator {
 	static validPassword = (password) => {
 		return password.length > 8 ? "" : "Password must be longer than 8 characters";
 	}
+
+	static validPasswordConfirm = (password, passwordConfirm) => {
+		return password === passwordConfirm ? "" : "Passwords does not match";
+	}
 }
