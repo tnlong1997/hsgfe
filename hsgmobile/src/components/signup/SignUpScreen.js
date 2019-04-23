@@ -1,12 +1,12 @@
 import React from "react";
 import { View, ActivityIndicator } from "react-native";
 import { Card, Button, Text, Input } from "react-native-elements";
-import { onSignIn } from "../../../auth";
-import styles from '../general/Styles';
+import { onSignIn } from "../../utils/auth";
+import styles from './Styles';
 import HttpRequest from '../../utils/HttpRequest';
 import Validator from "../../utils/Validators";
 
-export default class SignUp extends React.Component {
+export default class SignUpScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -56,34 +56,36 @@ export default class SignUp extends React.Component {
 						buttonStyle={{ marginTop: 20 }}
 						backgroundColor="#03A9F4"
 						title="SIGN UP"
-						onPress={() => {
+						onPress={async () => {
 							let emailError = Validator.validEmail(this.state.email);
 							let passwordError = Validator.validPassword(this.state.password);
 							let passwordConfirmError = Validator.validPasswordConfirm(this.state.password, this.state.passwordConfirm);
-							this.setState({validationError: ""});
-							this.setState({emailError: emailError});
-							this.setState({passwordError: passwordError});
-							this.setState({passwordConfirmError: passwordConfirmError});
+							this.setState({ validationError: "" });
+							if (this.state.emailError != emailError 
+								|| this.state.passwordError != passwordError 
+								|| this.state.passwordConfirmError != passwordConfirmError) {
+								this.setState({
+									emailError: emailError,
+									passwordError: passwordError,
+									passwordConfirmError: passwordConfirmError
+								});
+							}
 							let info = {
 								email: this.state.email,
 								password: this.state.password
 							};
 							if (!emailError && !passwordError && !passwordConfirmError) {
 								this.setState({loading: true});
-								HttpRequest.post('/users/signup', info).then((res) => {
-									this.setState({loading: false});
-									if (res.status == 200) {
-										HttpRequest.post('/users/login', info).then((response) => {
-											if (response.status == 200) {
-												onSignIn(response.token).then(() => this.props.navigation.navigate("SignedIn"));
-											} else {
-												this.setState({validationError: response.err});
-											}
-										});
+								let signUp = await HttpRequest.post('/users/signup', info);
+								this.setState({loading: false});
+								if (signUp.success && signUp.body.status == 200) {
+									let signIn = await HttpRequest.post('/users/login', info);
+									if (signIn.success && signIn.body.status == 200) {
+										onSignIn(signIn.body.token).then(() => this.props.navigation.navigate("SignedIn"));
 									} else {
-										this.setState({validationError: res.err});
+										this.setState({validationError: signIn.body.err});
 									}
-								});
+								}
 							}
 						}}/>
 					<Button

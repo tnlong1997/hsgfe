@@ -6,7 +6,7 @@ import styles from './Styles';
 import {Header, Icon, Avatar} from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import SearchResultScreen from './SearchResultScreen';
-import EventDetail from '../general/EventDetail';
+import EventDetail from '../event/EventDetail';
 
 export class FeedScreen extends Component {
 	render() {

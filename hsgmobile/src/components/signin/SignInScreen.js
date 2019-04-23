@@ -2,11 +2,11 @@ import React from "react";
 import { View, ActivityIndicator } from "react-native";
 import { Card, Button, Input, Text } from "react-native-elements";
 import  HttpRequest from '../../utils/HttpRequest';
-import { onSignIn } from "../../../auth";
+import { onSignIn } from "../../utils/auth";
 import Validator from "../../utils/Validators";
-import styles from '../general/Styles';
+import styles from './Styles';
 
-export default class SignIn extends React.Component {
+export default class SignInScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -55,26 +55,33 @@ export default class SignIn extends React.Component {
 						buttonStyle={{ marginTop: 20 }}
 						backgroundColor="#03A9F4"
 						title="SIGN IN"
-						onPress={() => {
+						onPress={ async () => {
 							let emailError = Validator.validEmail(this.state.email);
 							let passwordError = Validator.validPassword(this.state.password);
 							let info = {
 								email: this.state.email,
 								password: this.state.password
 							};
-							this.setState({validationError: ""});
-							this.setState({emailError: emailError});
-							this.setState({passwordError: passwordError});
+							this.setState({ validationError: "" });
+							if (this.state.emailError != emailError || this.state.passwordError != passwordError) {
+								this.setState({
+									emailError: emailError,
+									passwordError: passwordError
+								});
+							} 
 							if (!emailError && !passwordError) {
 								this.setState({loading: true});
-								HttpRequest.post('/users/login', info).then((res) => {
-									this.setState({loading: false});
-									if (res.status == 200) {
-										onSignIn(res.token).then(() => this.props.navigation.navigate("SignedIn"));
+								let res = await HttpRequest.post('/users/login', info);
+								this.setState({loading: false});
+								if (res.success) {
+									if (res.body.status == 200) {
+										onSignIn(res.body.token).then(() => this.props.navigation.navigate("SignedIn"));
 									} else {
-										this.setState({validationError: res.err});
+										this.setState({validationError: res.body.err});
 									}
-								});
+								} else {
+									alert("Cannot connect to server.");
+								}
 							}
 						}}
 					/>

@@ -1,7 +1,7 @@
 /* global require */
 import React from "react";
-import { createRootNavigator } from "./src/components/routes/router";
-import { isSignedIn } from "./auth";
+import { createRootNavigator } from "./src/utils/router";
+import { isSignedIn } from "./src/utils/auth";
 import { ActivityIndicator, View, Image } from 'react-native';
 import { Font } from 'expo';
 
