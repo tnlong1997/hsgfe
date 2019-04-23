@@ -64,12 +64,16 @@ export default class SignUp extends React.Component {
 							this.setState({emailError: emailError});
 							this.setState({passwordError: passwordError});
 							this.setState({passwordConfirmError: passwordConfirmError});
+              let info = {
+                email: this.state.email,
+                password: this.state.password
+              }
 							if (!emailError && !passwordError && !passwordConfirmError) {
 								this.setState({loading: true});
-								HttpRequest.post('/users/signup', this.state).then((res) => {
+								HttpRequest.post('/users/signup', info).then((res) => {
 									this.setState({loading: false});
 									if (res.status == 200) {
-										HttpRequest.post('/users/login', this.state).then((response) => {
+										HttpRequest.post('/users/login', info).then((response) => {
 											if (response.status == 200) {
 												onSignIn(response.token).then(() => this.props.navigation.navigate("SignedIn"));
 											} else {

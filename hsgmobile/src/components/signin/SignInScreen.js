@@ -58,12 +58,16 @@ export default class SignIn extends React.Component {
 						onPress={() => {
 							let emailError = Validator.validEmail(this.state.email);
 							let passwordError = Validator.validPassword(this.state.password);
+							let info = {
+								email: this.state.email,
+								password: this.state.password
+							}
 							this.setState({validationError: ""});
 							this.setState({emailError: emailError});
 							this.setState({passwordError: passwordError});
 							if (!emailError && !passwordError) {
 								this.setState({loading: true});
-								HttpRequest.post('/users/login', this.state).then((res) => {
+								HttpRequest.post('/users/login', info).then((res) => {
 									this.setState({loading: false});
 									if (res.status == 200) {
 										onSignIn(res.token).then(() => this.props.navigation.navigate("SignedIn"));
