@@ -24,6 +24,11 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyBxKbM4eOUvJs_kynQFknbvMCEPE1gFHDQ" }   
+      }
     }
   }
 }

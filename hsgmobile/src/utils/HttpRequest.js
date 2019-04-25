@@ -9,13 +9,14 @@ export default class HttpRequest {
 				},
 				body: JSON.stringify(data),
 			}).then((response) => response.json())
-				.then((res) => resolve({
-					success: true,
-					body: res 
-				})).catch((err) => resolve({
-					success: false,
-					body: err
-				}));
+			.then((res) => resolve({
+				success: true,
+				body: res 
+			}))
+			.catch((err) => resolve({
+				success: false,
+				body: err
+			}));
 		});
 	}
 }
