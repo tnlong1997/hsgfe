@@ -71,13 +71,13 @@ export default class SignInScreen extends React.Component {
 							} 
 							if (!emailError && !passwordError) {
 								this.setState({loading: true});
-								let res = await HttpRequest.post('/users/login', info);
+								let signInResponse = await HttpRequest.post('/users/login', info);
 								this.setState({loading: false});
-								if (res.success) {
-									if (res.body.status == 200) {
-										onSignIn(res.body.token).then(() => this.props.navigation.navigate("SignedIn"));
+								if (signInResponse.success) {
+									if (signInResponse.body.status == 200) {
+										onSignIn(signInResponse.body.token).then(() => this.props.navigation.navigate("SignedIn"));
 									} else {
-										this.setState({validationError: res.body.err});
+										this.setState({validationError: signInResponse.body.err});
 									}
 								} else {
 									alert("Cannot connect to server.");

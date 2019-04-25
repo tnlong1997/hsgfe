@@ -2,7 +2,7 @@
 
 import { shallow, mount, render} from 'enzyme';
 import renderer from 'react-test-renderer';
-import SignInScreen from '../components/signin/SignInScreen';
+import SignInScreen from '../components/SignInScreen/SignInScreen';
 import React from 'react';
 
 it('Login page state change', () => {
