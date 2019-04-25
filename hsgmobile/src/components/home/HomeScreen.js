@@ -1,12 +1,12 @@
 /* global require */
 import React, {Component} from 'react';
-import { View, Text, Image } from 'react-native';
+import { Image } from 'react-native';
 import SearchForm from './SearchForm';
-import { Font} from 'expo';
 import styles from './Styles';
 import {Header, Icon, Avatar} from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import SearchResultScreen from './SearchResultScreen';
+import EventDetail from '../event/EventDetail';
 
 export class FeedScreen extends Component {
 	render() {
@@ -24,11 +24,11 @@ export class FeedScreen extends Component {
 					/>
 				}
 				centerComponent={
-					<Image 
-						source={require('../../../assets/Hasagi.png')} 
-						style={styles.logo} 
+					<Image
+						source={require('../../../assets/Hasagi.png')}
+						style={styles.logo}
 						backgroundColor='transparent'
-					/> 
+					/>
 				}
 				rightComponent={
 					<Icon
@@ -51,40 +51,18 @@ const RootStack = createStackNavigator(
 		Feed: FeedScreen,
 		Search: SearchForm,
 		SearchResult: SearchResultScreen,
+		Event: EventDetail
 	},
 	{
 		initialRouteName: 'Feed',
 		headerMode: 'none'
 	}
 );
-  
+
 const AppContainer = createAppContainer(RootStack);
 
-export default class HostScreen extends Component {
-	constructor(props) {
-		super(props);
-		this.state = { loading: true };
-	}
-		
-	async UNSAFE_componentWillMount() {
-		await Font.loadAsync({
-			Roboto: require("native-base/Fonts/Roboto.ttf"),
-			Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
-		});
-		this.setState({ loading: false });
-	}
+export default class HomeScreen extends Component {
 	render() {
-		if (this.state.loading) {
-			return (
-				<View>
-					<Text>Loading...</Text>
-				</View>
-			);
-		} else {
-			// a = this.props.navigation;
-			// a.navigate('SearchResult');
-			// console.log("\n\n\n")
-			return <AppContainer />;
-		}
+		return <AppContainer />;
 	}
 }

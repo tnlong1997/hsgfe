@@ -1,48 +1,66 @@
-import React from 'react';
-import { Icon } from 'native-base';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
-import HomeScreen from './src/components/home/HomeScreen';
-import HostScreen from './src/components/host/HostScreen';
-import NotiScreen from './src/components/noti/NotiScreen';
+/* global require */
+import React from "react";
+import { createRootNavigator } from "./src/utils/router";
+import { isSignedIn } from "./src/utils/auth";
+import { ActivityIndicator, View, Image } from 'react-native';
+import { Font } from 'expo';
 
-const NavStack = createBottomTabNavigator(
-	{
-		// Test: SearchResultScreen, // Test screen for UI developing, comment out when doing UI test.
-		Home: HomeScreen,
-		Host: HostScreen,
-		Noti: NotiScreen
-	},
-	{
-		defaultNavigationOptions: ({ navigation }) => ({
-			tabBarIcon: ({ tintColor }) => {
-				// console.log(navigation.state)
-				const { routeName } = navigation.state;
-				let iconName;
-				if (routeName === 'Home') {
-					iconName = `md-home`;
-
-				// Sometimes we want to add badges to some icons. 
-				// You can check the implementation below.
-				// IconComponent = HomeIconWithBadge; 
-				} else if (routeName === 'Host') {
-					iconName = `ios-basketball`;
-				} else if (routeName === 'Noti') {
-					iconName = 'ios-notifications';
-				} else if (routeName === 'Test') {
-					iconName = 'ios-settings';
-				}
-
-				// You can return any component that you like here!
-				return <Icon name={iconName} size={25} color={tintColor} />;
-			},
-		}),
-		tabBarOptions: {
-			activeTintColor: '#000000',
-			inactiveTintColor: '#FFFFFC',
-			activeBackgroundColor: '#FECC52',
-			inactiveBackgroundColor: '#F49F0A'
-		},
+export default class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			signedIn: false,
+			checkedSignIn: true,
+			loading: true
+		};
 	}
-);
 
-export default createAppContainer(NavStack);
+	componentDidMount() {
+		isSignedIn()
+			.then(res => this.setState({ signedIn: res, checkedSignIn: true }));
+	}
+
+	async UNSAFE_componentWillMount() {
+		await Font.loadAsync({
+			Roboto: require("native-base/Fonts/Roboto.ttf"),
+			Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
+		});
+		this.setState({ loading: false });
+	}
+
+	render() {
+		const { checkedSignIn, signedIn, loading } = this.state;
+
+		if (loading) {
+			return (
+				<View>
+					<Image
+						source={require('./assets/Hasagi.png')}
+						style={{width: '100%', height: '100%'}}
+						backgroundColor='tranparent'
+					/>
+					<View style ={{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						bottom: 50,
+						alignItems: 'center',
+						justifyContent: 'center'
+					}}>
+						<ActivityIndicator size="large" color="#F49F0A" />
+					</View>
+				</View>
+			);
+		}
+
+		// If we haven't checked AsyncStorage yet, don't render anything (better ways to do this)
+		else if (!checkedSignIn) {
+			return null;
+		}
+
+		else {
+			const Layout = createRootNavigator(signedIn);
+			return <Layout />;
+		}
+	}
+}
