@@ -76,14 +76,14 @@ export default class SignUpScreen extends React.Component {
 							};
 							if (!emailError && !passwordError && !passwordConfirmError) {
 								this.setState({loading: true});
-								let signUp = await HttpRequest.post('/users/signup', info);
+								let signUpResponse = await HttpRequest.post('/users/signup', info);
 								this.setState({loading: false});
-								if (signUp.success && signUp.body.status == 200) {
-									let signIn = await HttpRequest.post('/users/login', info);
-									if (signIn.success && signIn.body.status == 200) {
-										onSignIn(signIn.body.token).then(() => this.props.navigation.navigate("SignedIn"));
+								if (signUpResponse.success && signUpResponse.body.status == 200) {
+									let signInResponse = await HttpRequest.post('/users/login', info);
+									if (signInResponse.success && signInResponse.body.status == 200) {
+										onSignIn(signInResponse.body.token).then(() => this.props.navigation.navigate("SignedIn"));
 									} else {
-										this.setState({validationError: signIn.body.err});
+										this.setState({validationError: signInResponse.body.err});
 									}
 								}
 							}

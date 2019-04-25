@@ -2,13 +2,13 @@ import React from "react";
 import { Platform, StatusBar } from "react-native";
 import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator } from "react-navigation";
 import {Icon} from 'native-base';
-import SignIn from "../components/signin/SignInScreen";
-import SignUp from "../components/signup/SignUpScreen";
+import SignIn from "../components/SignInScreen/SignInScreen";
+import SignUp from "../components/SignUpScreen/SignUpScreen";
 import HomeScreen from "../components/home/HomeScreen";
 import HostScreen from "../components/host/HostScreen";
 import NotiScreen from "../components/noti/NotiScreen";
 // import TestScreen from "../test/TestScreen";
-import ProfileScreen from "../components/profile/ProfileScreen";
+import ProfileScreen from "../components/ProfileScreen/ProfileScreen";
 
 const headerStyle = {
 	marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
