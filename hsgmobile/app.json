@@ -26,8 +26,9 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.hsg.fe",
       "config": {
-        "googleMaps": { "apiKey": "AIzaSyBxKbM4eOUvJs_kynQFknbvMCEPE1gFHDQ" }   
+        "googleMaps": { "apiKey": "AIzaSyATS3PfMqDDM-UwBVvxGHhqwj70BU2U4dY" }   
       }
     }
   }

@@ -1,7 +1,7 @@
 export default class HttpRequest {
 	static post = (url, data) => {
 		return new Promise((resolve) => {
-			fetch('https://hasagi-test.herokuapp.com' + url, {
+			fetch(global.serverUrl + url, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',

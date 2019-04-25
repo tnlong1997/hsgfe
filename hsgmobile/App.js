@@ -1,5 +1,6 @@
 /* global require */
 import React from "react";
+import './global';
 import { createRootNavigator } from "./src/utils/router";
 import { isSignedIn } from "./src/utils/auth";
 import { ActivityIndicator, View, Image } from 'react-native';
@@ -13,6 +14,7 @@ export default class App extends React.Component {
 			checkedSignIn: true,
 			loading: true
 		};
+		global.key = "1234"
 	}
 
 	componentDidMount() {
