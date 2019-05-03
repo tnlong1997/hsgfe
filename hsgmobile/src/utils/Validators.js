@@ -15,6 +15,20 @@ export default class Validator {
 	}
 
 	static validPasswordConfirm = (password, passwordConfirm) => {
-		return password === passwordConfirm ? "" : "Passwords does not match";
+		return password === passwordConfirm ? "" : "Passwords do not match";
+	}
+
+	static validName = (name) => {
+		return name.length > 0 ? "" : "Name is required";
+	}
+
+	static validPhone = (phone) => {
+		let reg = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+		if (phone.length > 0) {
+			if (reg.test(phone) === false) {
+				return "Invalid phone number format";
+			}
+		return "";
+		}
 	}
 }

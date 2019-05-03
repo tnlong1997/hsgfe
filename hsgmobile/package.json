@@ -18,6 +18,8 @@
     "react-native-modal-datetime-picker": "^6.1.0",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.7.1",
+    "react-number-format": "^4.0.7",
+    "react-phone-input-auto-format": "^0.1.0",
     "react-test-renderer": "^16.8.6"
   },
   "devDependencies": {
