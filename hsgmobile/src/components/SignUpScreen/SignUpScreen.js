@@ -34,21 +34,18 @@ export default class SignUpScreen extends React.Component {
 					{/* First Name */}
 					<Input
 						placeholder="First Name"
-						onChangeText={(fName) => this.setState({fName})}
-				 	/>
+						onChangeText={(fName) => this.setState({fName})}/>
 					<Text style={styles.errorText}>{this.state.fnameError}</Text>
 					{/* Last Name */}
 					<Input
 						placeholder="Last Name"
-						onChangeText={(lName) => this.setState({lName})}
-				 	/>
+						onChangeText={(lName) => this.setState({lName})}/>
 					<Text style={styles.errorText}>{this.state.lnameError}</Text>
 					{/* Phone Number */}
 					<Input
 						placeholder="Phone Number (Optional)"
 						keyboardType="phone-pad"
-						onChangeText={(phone) => this.setState({phone})}
-				 	/>
+						onChangeText={(phone) => this.setState({phone})}/>
 					<Text style={styles.errorText}>{this.state.phoneError}</Text>
 					{/* Email */}
 					<Input

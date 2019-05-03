@@ -28,7 +28,7 @@ export default class Validator {
 			if (reg.test(phone) === false) {
 				return "Invalid phone number format";
 			}
-		return "";
+			return "";
 		}
 	}
 }
