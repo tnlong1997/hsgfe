@@ -1,35 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import MapRequest from '../../utils/MapRequest';
 import { TextInput } from 'react-native-gesture-handler';
-// import console = require('console');
+
 
 export default class Map extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            location: null
-        }
-        // fetch('https://maps.google.com/maps/api/geocode/json?address=125/41 Nguyen Cuu Van&key=AIzaSyATS3PfMqDDM-UwBVvxGHhqwj70BU2U4dY', {
-		// 		method: 'POST',
-		// 		headers: {
-		// 			Accept: 'application/json',
-		// 			'Content-Type': 'application/json',
-		// 		},
-		// 		body: JSON.stringify({}),
-		// 	}).then((response) => response.json())
-		// 	.then((res) => console.log(res))
-        //     .catch((err) => console.log(err));
-        // Geocode.fromAddress("Ho Chi Minh").then(
-        //     response => {
-        //         const address = response.results[0].formatted_address;
-        //         console.log(address);
-        //     }
-        // )
+            location: null,
+            marker: {
+                latitude: 10.795226,
+                longitude: 106.708288,
+                title: 'Foo Place',
+                description: '1234 Foo Drive'
+            }
+        };
+        this.mapView = null;
     }
 
-    // _mapView: MapView;
+    animate(r){
+        this.mapView.animateToRegion(r, 2000);
+    }
 
     render() {
         return (
@@ -38,6 +31,7 @@ export default class Map extends React.Component {
                 height: '100%'
             }}>
                 <MapView
+                    ref={(ref)=>this.mapView=ref}
                     provider={PROVIDER_GOOGLE}
                     style={styles.map}
                     showsUserLocation={true}
@@ -52,7 +46,17 @@ export default class Map extends React.Component {
                         latitudeDelta: 0.008,
                         longitudeDelta: 0.008,
                     }}
-                />
+                    annotations={this.state.markers}
+                >
+                    <Marker 
+                        coordinate={{
+                            latitude: this.state.marker.latitude,
+                            longitude: this.state.marker.longitude
+                        }}
+                        title={this.state.marker.title}
+                        description={this.state.marker.description}
+                    />
+                </MapView>
                 <TextInput 
                     style={{
                         height: 40, 
@@ -66,13 +70,15 @@ export default class Map extends React.Component {
                 />
                 <Button title="Search" 
                     onPress={async () => {
-                        console.log("AAA")
-                        console.log(this.state.location)
-                        let response = await MapRequest.getByAddress(this.state.location)
-                        // _mapView.animateToCoordinate({
-                        //     latitude: LATITUDE,
-                        //     longitude: LONGITUDE
-                        // }, 1000)
+                        let response = await MapRequest.getByAddress(this.state.location);
+                        let location = response.body.results[0].geometry.location;
+                        let newRegion = {
+                            latitude: location.lat,
+                            longitude: location.lng,
+                            latitudeDelta: 0.014,
+                            longitudeDelta: 0.014
+                        }
+                        this.animate(newRegion);
                     }}
                 />
             </View>

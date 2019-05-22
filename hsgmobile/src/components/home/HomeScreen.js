@@ -43,7 +43,7 @@ export class FeedScreen extends Component {
 						/>
 					}
 				/>
-				<Map />
+				{/* <Map /> */}
 			</View>
 		);
 	}
@@ -55,10 +55,11 @@ const RootStack = createStackNavigator(
 		Feed: FeedScreen,
 		Search: SearchForm,
 		SearchResult: SearchResultScreen,
-		Event: EventDetail
+		Event: EventDetail,
+		Map: Map
 	},
 	{
-		initialRouteName: 'Feed',
+		initialRouteName: 'SearchResult',
 		headerMode: 'none'
 	}
 );

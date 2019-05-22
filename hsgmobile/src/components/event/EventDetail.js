@@ -114,6 +114,16 @@ export default class EventDetail extends Component {
 						<View style={{flex: 6, alignItems: 'flex-start'}}>
 							<Text style={styles.infoDetail} numberOfLines={1}>{detail.location}</Text>
 						</View>
+						<View style={{flex: 1, marginTop: 6}}>
+							<Icon 
+								name="chevron-right"
+								type="evilicon"
+								size={35}
+								onPress={() => {
+									this.props.navigation.push('Map');
+								}}
+							/>
+						</View>
 					</View>
 					<Divider />
 
