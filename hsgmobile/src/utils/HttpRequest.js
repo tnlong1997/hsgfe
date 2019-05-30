@@ -1,7 +1,8 @@
+/* global global */
 export default class HttpRequest {
 	static post = (url, data) => {
 		return new Promise((resolve) => {
-			fetch('https://hasagi-test.herokuapp.com' + url, {
+			fetch(global.serverUrl + url, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -12,7 +13,8 @@ export default class HttpRequest {
 				.then((res) => resolve({
 					success: true,
 					body: res 
-				})).catch((err) => resolve({
+				}))
+				.catch((err) => resolve({
 					success: false,
 					body: err
 				}));

@@ -1,46 +1,50 @@
 /* global require */
 import React, {Component} from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
 import SearchForm from './SearchForm';
 import styles from './Styles';
-import {Header, Icon, Avatar} from 'react-native-elements';
+import { Header, Icon, Avatar } from 'react-native-elements';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import SearchResultScreen from './SearchResultScreen';
 import EventDetail from '../event/EventDetail';
+import Map from '../Map/Map';
 
 export class FeedScreen extends Component {
 	render() {
 		return (
-			<Header
-				backgroundColor= '#F49F0A'
-				leftComponent={
-					<Avatar
-						rounded
-						source={{
-							uri:
-							'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-						}}
-						title="MD"
-					/>
-				}
-				centerComponent={
-					<Image
-						source={require('../../../assets/Hasagi.png')}
-						style={styles.logo}
-						backgroundColor='transparent'
-					/>
-				}
-				rightComponent={
-					<Icon
-						name='search'
-						type='font-awesome'
-						color='#000000'
-						onPress={() => {
-							this.props.navigation.push('Search');
-						}}
-					/>
-				}
-			/>
+			<View>
+				<Header
+					backgroundColor= '#F49F0A'
+					leftComponent={
+						<Avatar
+							rounded
+							source={{
+								uri:
+								'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+							}}
+							title="MD"
+						/>
+					}
+					centerComponent={
+						<Image
+							source={require('../../../assets/Hasagi.png')}
+							style={styles.logo}
+							backgroundColor='transparent'
+						/>
+					}
+					rightComponent={
+						<Icon
+							name='search'
+							type='font-awesome'
+							color='#000000'
+							onPress={() => {
+								this.props.navigation.push('Search');
+							}}
+						/>
+					}
+				/>
+				{/* <Map /> */}
+			</View>
 		);
 	}
 }
@@ -51,7 +55,8 @@ const RootStack = createStackNavigator(
 		Feed: FeedScreen,
 		Search: SearchForm,
 		SearchResult: SearchResultScreen,
-		Event: EventDetail
+		Event: EventDetail,
+		Map: Map
 	},
 	{
 		initialRouteName: 'Feed',

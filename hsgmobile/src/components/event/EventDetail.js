@@ -3,6 +3,7 @@ import {Text, View, Image} from 'react-native';
 import React, {Component} from 'react';
 import { Divider, Header, Icon } from 'react-native-elements';
 import styles from './Styles';
+import MapRequest from '../../utils/MapRequest';
 
 export default class EventDetail extends Component {
 	constructor(props) {
@@ -113,6 +114,24 @@ export default class EventDetail extends Component {
 						</View>
 						<View style={{flex: 6, alignItems: 'flex-start'}}>
 							<Text style={styles.infoDetail} numberOfLines={1}>{detail.location}</Text>
+						</View>
+						<View style={{flex: 1, marginTop: 6}}>
+							<Icon 
+								name="chevron-right"
+								type="evilicon"
+								size={35}
+								onPress={() => {
+									MapRequest.getByAddress(detail.location).then(response => {
+										let geo = response.body.results[0].geometry.location;
+										this.props.navigation.push('Map', {
+											location: {
+												lat: geo.lat,
+												lng: geo.lng
+											}
+										});
+									});
+								}}
+							/>
 						</View>
 					</View>
 					<Divider />

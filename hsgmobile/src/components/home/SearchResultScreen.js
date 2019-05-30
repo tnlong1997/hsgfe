@@ -47,7 +47,7 @@ export default class SearchResultScreen extends Component {
 							key: '0', // Event ID
 							name: 'MU vs Barca',
 							hostName: 'Mike',
-							location: 'Mỹ Đình',
+							location: 'San van dong My Dinh',
 							time: 'Jan 1, 2019, 06:00 pm',
 							numOfPlayers: 24,
 							sport: 'Soccer',
@@ -57,7 +57,7 @@ export default class SearchResultScreen extends Component {
 							key: '1',
 							name: 'Basketball 101',
 							hostName: 'John',
-							location: '123 Main Street, LA',
+							location: 'UCLA basketball field',
 							time: 'Apr 12, 2019, 08:47 pm',
 							numOfPlayers: 12,
 							sport: 'Basketball',
