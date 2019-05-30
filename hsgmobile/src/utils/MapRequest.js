@@ -1,5 +1,4 @@
-
-
+/* global global */
 export default class MapRequest {
 	static getByAddress = (address) => {
 		return new Promise((resolve) => {
@@ -11,14 +10,14 @@ export default class MapRequest {
 				},
 				body: JSON.stringify({}),
 			}).then((response) => response.json())
-			.then((res) => resolve({
-				success: true,
-				body: res 
-			}))
-			.catch((err) => resolve({
-				success: false,
-				body: err
-			}));
+				.then((res) => resolve({
+					success: true,
+					body: res 
+				}))
+				.catch((err) => resolve({
+					success: false,
+					body: err
+				}));
 		});
 	}
 	// https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452
@@ -32,14 +31,14 @@ export default class MapRequest {
 				},
 				body: JSON.stringify({}),
 			}).then((response) => response.json())
-			.then((res) => resolve({
-				success: true,
-				body: res 
-			}))
-			.catch((err) => resolve({
-				success: false,
-				body: err
-			}));
+				.then((res) => resolve({
+					success: true,
+					body: res 
+				}))
+				.catch((err) => resolve({
+					success: false,
+					body: err
+				}));
 		});
 	}
 }

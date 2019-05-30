@@ -1,2 +1,3 @@
-global.mapKey = "AIzaSyATS3PfMqDDM-UwBVvxGHhqwj70BU2U4dY"
-global.serverUrl = "https://hasagi-test.herokuapp.com"
+/* global global */
+global.mapKey = "AIzaSyC6pPyhbh_Atf64IX97pexADSufr758BO0";
+global.serverUrl = "https://hasagi-test.herokuapp.com";

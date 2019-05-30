@@ -59,7 +59,7 @@ const RootStack = createStackNavigator(
 		Map: Map
 	},
 	{
-		initialRouteName: 'SearchResult',
+		initialRouteName: 'Feed',
 		headerMode: 'none'
 	}
 );

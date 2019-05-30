@@ -1,4 +1,5 @@
 /* global require */
+/* global global */
 import React from "react";
 import './global';
 import { createRootNavigator } from "./src/utils/router";
@@ -14,7 +15,7 @@ export default class App extends React.Component {
 			checkedSignIn: true,
 			loading: true
 		};
-		global.key = "1234"
+		global.key = "1234";
 	}
 
 	componentDidMount() {
