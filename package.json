@@ -9,7 +9,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-react": "^7.12.4",
     "htmlhint": "^0.11.0",
-    "npm": "^6.9.0",
+    "npm": "^6.14.6",
     "stylelint": "^9.10.1"
   },
   "scripts": {
